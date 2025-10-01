@@ -4,9 +4,9 @@ FROM node:20-alpine
 # Create app directory
 WORKDIR /app
 
-# Install dependencies (using npm install as requested)
+# Install dependencies including devDependencies (vite needed for build/preview)
 COPY package*.json ./
-RUN npm install
+RUN npm install --include=dev
 
 # Copy source and build
 COPY . .
