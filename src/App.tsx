@@ -30,7 +30,13 @@ function App() {
             Should We Have This Meeting?
           </h1>
           <p className="text-xl text-slate-400">
-            Drop your meeting link, calendar invite, or any text, and <span className="font-semibold bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">AI will figure out</span> what you should do.
+            Drop your meeting link or your meeting brief, and 
+          </p>
+          <p className="text-xl font-semibold bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent mb-3">
+            AI will analyze if it's actually necessary.
+          </p>
+          <p className="text-base text-slate-500 max-w-xl mx-auto">
+            By avoiding low-value meetings, you'll save hours that could be spent shipping code and delivering value to customers. More building, less talking.
           </p>
           <div className="mt-4 w-48 h-0.5 bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 mx-auto"></div>
         </div>
