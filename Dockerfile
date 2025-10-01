@@ -4,9 +4,9 @@ FROM node:20-alpine
 # Create app directory
 WORKDIR /app
 
-# Install dependencies using lockfile for reproducible builds
+# Install dependencies (using npm install as requested)
 COPY package*.json ./
-RUN npm ci --no-audit --no-fund
+RUN npm install
 
 # Copy source and build
 COPY . .
