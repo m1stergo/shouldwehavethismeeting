@@ -1,29 +1,19 @@
-# Multi-stage Dockerfile for Vite (React + TS)
-# 1) Build stage
-FROM node:20-alpine AS builder
+# Dockerfile for Vite (React + TS) running on EasyPanel
+FROM node:20-alpine
+
+# Create app directory
 WORKDIR /app
 
-# Install dependencies
+# Install dependencies using lockfile for reproducible builds
 COPY package*.json ./
 RUN npm ci --no-audit --no-fund
 
-# Build
+# Copy source and build
 COPY . .
 RUN npm run build
 
-# 2) Run stage (serve static files via nginx)
-FROM nginx:1.27-alpine AS runner
+# Expose the port that Vite preview will listen on
+EXPOSE 3000
 
-# Copy nginx config for SPA fallback
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Copy compiled assets
-COPY --from=builder /app/dist /usr/share/nginx/html
-
-# Expose port
-EXPOSE 80
-
-# Healthcheck (simple)
-HEALTHCHECK CMD wget -qO- http://127.0.0.1/ > /dev/null 2>&1 || exit 1
-
-CMD ["nginx", "-g", "daemon off;"]
+# Start the preview server binding to 0.0.0.0 so it's reachable from outside the container
+CMD ["npm", "run", "preview", "--", "--host", "0.0.0.0", "--port", "3000"]
