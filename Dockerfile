@@ -5,7 +5,7 @@ FROM node:20-alpine
 WORKDIR /app
 
 # Install dependencies including devDependencies (vite needed for build/preview)
-COPY package*.json ./
+COPY package.json ./
 ENV NPM_CONFIG_REGISTRY=https://registry.npmjs.org/
 RUN npm install --include=dev --registry=https://registry.npmjs.org/
 
