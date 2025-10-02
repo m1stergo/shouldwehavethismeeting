@@ -6,7 +6,8 @@ WORKDIR /app
 
 # Install dependencies including devDependencies (vite needed for build/preview)
 COPY package*.json ./
-RUN npm install --include=dev
+ENV NPM_CONFIG_REGISTRY=https://registry.npmjs.org/
+RUN npm install --include=dev --registry=https://registry.npmjs.org/
 
 # Copy source and build
 COPY . .
