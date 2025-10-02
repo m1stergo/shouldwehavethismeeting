@@ -13,8 +13,7 @@ RUN npm install --include=dev --registry=https://registry.npmjs.org/
 COPY . .
 RUN npm run build
 
-# Expose the port that Vite preview will listen on
-EXPOSE 3000
-
-# Start the preview server binding to 0.0.0.0 so it's reachable from outside the container
-CMD ["npm", "run", "preview", "--", "--host", "0.0.0.0", "--port", "3000"]
+# Install a static server and serve on port 80 for EasyPanel
+RUN npm install -g serve --registry=https://registry.npmjs.org/
+EXPOSE 80
+CMD ["serve", "-s", "dist", "-l", "80"]
